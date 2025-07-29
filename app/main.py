@@ -20,7 +20,7 @@ model = DetectionModel(MODEL_PATH)
 
 @app.get("/predict", response_model=PredictionResponse)
 def predict():
-    image_path = "src/yolo_dataset/train/images/0ac9bb14-image00025.jpeg"
+    image_path = "src/yolo_dataset/train/images/2d97fff7-image00045.jpeg"
     try:
         with open(image_path, "rb") as f:
             image_bytes = f.read()
