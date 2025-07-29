@@ -1,6 +1,6 @@
 from ultralytics import YOLO
 from PIL import Image
-from typing import List, Dict
+from typing import Dict
 import io
 
 
@@ -10,7 +10,6 @@ class DetectionModel:
         self.class_names = self.model.names
 
     def predict(self, image_bytes: bytes) -> Dict[str, int]:
-        """Predict objects in image and return counts by class name"""
         # Convert bytes to PIL Image
         image = Image.open(io.BytesIO(image_bytes))
 
