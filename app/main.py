@@ -6,14 +6,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Product Detection API")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 # Initialize model
 MODEL_PATH = "src/results/train2/weights/best.pt"
 model = DetectionModel(MODEL_PATH)
