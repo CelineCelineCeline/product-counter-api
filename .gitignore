@@ -1,0 +1,9 @@
+.venv
+
+yolo
+src/yolo_dataset
+results
+
+# no scripts and images from prpject root
+*.py
+*.jpg
