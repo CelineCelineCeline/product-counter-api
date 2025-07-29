@@ -10,13 +10,10 @@ class DetectionModel:
         self.class_names = self.model.names
 
     def predict(self, image_bytes: bytes) -> Dict[str, int]:
-        # Convert bytes to PIL Image
         image = Image.open(io.BytesIO(image_bytes))
 
-        # Run prediction
         results = self.model(image)
 
-        # Count detections by class
         counts = {}
         for result in results:
             for box in result.obb:
