@@ -6,16 +6,16 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Product Detection API")
 
-# Initialize model
 MODEL_PATH = "src/results/train2/weights/best.pt"
 model = DetectionModel(MODEL_PATH)
 
-@app.get("/predict", response_model=PredictionResponse)
-def predict():
-    image_path = "src/yolo_dataset/train/images/2d97fff7-image00045.jpeg"
+@app.post("/predict", response_model=PredictionResponse)
+async def predict(file: UploadFile = File(...)):
+    if not file.content_type.startswith('image/'):
+        raise HTTPException(status_code=400, detail="File must be an image")
+
     try:
-        with open(image_path, "rb") as f:
-            image_bytes = f.read()
+        image_bytes = await file.read()
         counts = model.predict(image_bytes)
         return {"items": counts}
     except Exception as e:
